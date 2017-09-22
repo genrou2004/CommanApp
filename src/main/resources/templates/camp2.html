@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base::head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:replace="base::nav"></th:block>
+
+<table>
+    <tr>
+        <td>
+            <th:block th:replace="base::sidebar"></th:block>
+        </td>
+        <td>
+            <h1>New Camp Submission</h1>
+            <div class="container">
+                <div class="jumbotron">
+                    <div class="content">
+                        <form th:action="@{/camp}" method="post" th:object="${camp}">
+                            <div class="form-group">
+                                <label for="title">Title<mark><strong><span th:if="${#fields.hasErrors('title')}"
+                                                                            th:errors="*{title}">Title Error</span></strong></mark></label></label>
+                                <input type="text" th:field="*{title}" class="form-control" id="title" placeholder="Enter the camp's title"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="streetAddress">Street Address</label></label>
+                                <input type="text" name="streetAddress" th:field="${address.streetAddress}" class="form-control" id="streetAddress" placeholder="Enter the street address"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City</label></label>
+                                <input type="text" name="city" class="form-control" th:field="${address.city}" id="city" placeholder="Enter the city"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="state">State</label></label>
+                                <input type="text" name="state" class="form-control" th:field="${address.state}" id="state" placeholder="Enter the state"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="zipCode">Zip Code</label>
+                                <input type="number" name="zipCode" class="form-control" th:field="${address.zipCode}" id="zipCode" placeholder="Enter the zip code"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="startDay">Start Day<mark><strong><span th:if="${#fields.hasErrors('startDay')}"
+                                                                                   th:errors="*{startDay}">Start Day Error</span></strong></mark></label></label>
+                                <input type="number" th:field="*{startDay}" class="form-control" id="startDay" placeholder="Enter the start day"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="startMonth">Start Month<mark><strong><span th:if="${#fields.hasErrors('startMonth')}"
+                                                                                       th:errors="*{startMonth}">Start Month Error</span></strong></mark></label></label>
+                                <input type="number" th:field="*{startMonth}" class="form-control" id="startMonth" placeholder="Enter the start month"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="startYear">Start Year<mark><strong><span th:if="${#fields.hasErrors('startYear')}"
+                                                                                     th:errors="*{startYear}">Start Year Error</span></strong></mark></label></label>
+                                <input type="number" th:field="*{startYear}" class="form-control" id="startYear" placeholder="Enter the start year"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="endDay">End Day<mark><strong><span th:if="${#fields.hasErrors('endDay')}"
+                                                                               th:errors="${camp.endDay}">End Day Error</span></strong></mark></label></label>
+                                <input type="number" th:field="${camp.endDay}" class="form-control" id="endDay" placeholder="Enter the end day"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="endMonth">End Month<mark><strong><span th:if="${#fields.hasErrors('endMonth')}"
+                                                                                   th:errors="*{endMonth}">End Month Error</span></strong></mark></label></label>
+                                <input type="number" th:field="*{endMonth}" class="form-control" id="endMonth" placeholder="Enter the end month"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="endYear">End Year<mark><strong><span th:if="${#fields.hasErrors('endYear')}"
+                                                                                 th:errors="*{endYear}">End Year Error</span></strong></mark></label></label>
+                                <input type="number" th:field="*{endYear}" class="form-control" id="endYear" placeholder="Enter the end year"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description<mark><strong><span th:if="${#fields.hasErrors('description')}"
+                                                                                        th:errors="*{description}">Description Error</span></strong></mark></label></label>
+                                <textarea type="text" class="form-control" class="form-control" id="description" placeholder="Describe the camp" th:field="*{description}" />
+                            </div>
+                            <div class="form-group">
+                                <label for="directorDescription">Director Description<mark><strong><span th:if="${#fields.hasErrors('directorDescription')}"
+                                                                                                         th:errors="*{directorDescription}">Director Description Error</span></strong></mark></label></label>
+                                <textarea type="text" class="form-control" class="form-control" id="directorDescription" placeholder="Tell applicants about yourself"
+                                          th:field="*{directorDescription}" />
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </td>
+    </tr>
+</table>
+<th:block th:replace="base::footer"></th:block>
+</body>
+<th:block th:replace="base :: script"></th:block>
+</html>
+

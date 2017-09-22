@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <th:block th:replace="base :: head"></th:block>
+</head>
+<body>
+<th:block th:replace="base :: nav"></th:block>
+
+            <!--   you can change the color of the filter page using: data-color="blue | azure | green | orange | red | purple" -->
+            <div class="container">
+                <div class="jumbotron">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+                                <div th:if="${param.error}">
+                                    Invalid username and password.
+                                </div>
+                                <div th:if="${param.logout}">
+                                    You have been logged out.
+                                </div>
+                                <form th:action="@{/login}" method="post">
+
+                                    <!--   if you want to have the card without animation please remove the ".card-hidden" class   -->
+                                    <div class="card card-hidden">
+                                        <div class="content">
+                                            <div class="form-group">
+                                                <label>Email address</label>
+                                                <input type="email" name="username" placeholder="Enter email"
+                                                       class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Password</label>
+                                                <input type="password" name="password" placeholder="Password"
+                                                       class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="checkbox">
+                                                    <input type="checkbox" data-toggle="checkbox" value="">
+                                                    Remember me
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="footer text-center">
+                                            <button type="submit" class="btn btn-fill btn-primary">Login</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<th:block th:replace="base :: footlinks"></th:block>
+
+</body>
+<th:block th:replace="base :: script"></th:block>
+
+</html>

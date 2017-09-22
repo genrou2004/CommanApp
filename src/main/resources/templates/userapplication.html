@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head >
+    <th:block th:replace="base::head"></th:block>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:replace="base::nav"></th:block>
+<table>
+    <tr>
+        <td>
+            <th:block th:replace="base::sidebar"></th:block>
+        </td>
+        <td>
+            <h1>Student Application</h1>
+            <div class="container">
+                <div class="jumbotron">
+                <div class="content">
+                    <form th:action="@{/user}"  method="post" >
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea type="text" class="form-control" id="description" placeholder="Describe yourself" th:field="${userApplication.description}" ></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputname1">Graduation Day</label>
+                            <input type="number" class="form-control" th:field="${userApplication.gradDay}" id="exampleInputname1" min="1" max="31"value="Enter the graduation day"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputname2">Graduation Month</label>
+                            <input type="number" class="form-control" th:field="${userApplication.gradMonth}" id="exampleInputname2" min="1" max="12" value="Enter the graduation month"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputname3">Graduation Year</label>
+                            <input type="number" class="form-control" th:field="${userApplication.gradYear}" id="exampleInputname3" value="Enter the graduation year"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="streetAddress">Street Address</label>
+                            <input type="text" class="form-control" th:field="${address.streetAddress}" id="streetAddress"  placeholder="Enter the street address"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" class="form-control" th:field="${address.city}" id="city"  placeholder="Enter the city"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="state">State</label>
+                            <input type="text" class="form-control" th:field="${address.state}" id="state"  placeholder="Enter the state"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="zipcode">Zipcode</label>
+                            <input type="text" class="form-control" th:field="${address.zipCode}" id="zipcode"  placeholder="Enter the zipcode"/>
+                        </div>
+
+                        <label class="radio-inline">
+                            <input type="radio" name="radio" id="radio1" value="Highschool" aria-label="..." th:field="${userApplication.levelOfEdu}"/>
+                            Highschool
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="radio" id="radio2" value="Some college" aria-label="..." th:field="${userApplication.levelOfEdu}"/>
+                            Some college
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="radio" id="radio3" value="Bachelors Degree" aria-label="..." th:field="${userApplication.levelOfEdu}"/>
+                            Bachelors Degree
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="radio" id="radio4" value="Masters Degree or higher" aria-label="..." th:field="${userApplication.levelOfEdu}"/>
+                            Masters Degree or higher
+                        </label>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+<th:block th:replace="base :: footlinks"></th:block>
+</body>
+<th:block th:replace="base :: script"></th:block>
+</html>

@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en" xmlns:th="www.thymeleaf.org " xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:fragment="head">
+    <meta charset="utf-8"/>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <style>
+
+        .nav navbar-nav > ul{
+            color:Black;
+            font-family: "Helvetica Neue", "Open Sans", Arial, sans-serif;
+            font-size: large;
+        }
+        body:hover {
+            clip-path: polygon(0px 208px, 146.5px 207px, 147px 141.2px, ...);
+            animate: star 3s;
+        }
+
+        #navbar{
+
+            color:Black;
+            font-family: "Helvetica Neue", "Open Sans", Arial, sans-serif;
+            font-size: large;
+        }
+        #footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60px; /* Height of the footer */
+        }
+
+        body,.nav {
+            margin: 0;
+            background: url('https://www.oxforduniversityimages.com/images/rotate/Image_Spring_17_8.gif');
+            background-size: 1440px 800px;
+            background-repeat:no-repeat;
+            display: compact;
+            font: 13px/18px "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+*/
+        .navbar-nav > li > a {
+            padding-top: 5px !important;
+            padding-bottom: 5px !important;
+        }
+    </style>
+</head>
+
+<body>
+<nav class="navbar " th:fragment="nav">
+    <div class="jumbotron">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <th:block sec:authorize="isAuthenticated()">
+                        <li><a href="/logout">Logout</a></li>
+                    </th:block>
+                    <th:block sec:authorize="isAnonymous()">
+                        <li><a href="/login">Login</a></li>
+                        <li><a href="/register">Register</a></li>
+                    </th:block>
+                    <th:block sec:authorize="hasAuthority('USER')">
+                        <li><a href="/user">Apply Now</a></li>
+                        <li><a href="/camps">Camp's Nearby</a></li>
+                    </th:block>
+                    <th:block sec:authorize="hasAuthority('DIRECTOR')">
+                        <li><a href="/camp">Register NewCamp</a></li>
+                        <li><a href="/edit/editcamp">Update Camp</a></li>
+                        <li><a href="/applicants">View Applications </a></li>
+                    </th:block>
+                    <th:block sec:authorize="hasAuthority('ADMIN')">
+                        <li><a href="/admin/viewapplications">View Application</a></li>
+                        <li><a href="/admin/viewcampstudents">View Camp's</a></li>
+                        <li><a href="#">FeedBack</a></li>
+                    </th:block>
+                </ul>
+                <form sec:authorize="hasAuthority('USER')" class="navbar-form navbar-right" th:action="@{/search/camps}" th:object="${searchApp}" method="post">
+                    <input type="text" class="form-control" placeholder="Search for a Camp">
+                    <label class="radio-inline">
+                        <input type="radio" name="radio" id="radio1" value="Highschool" aria-label="..." th:field="*{searchValue}"/>
+                        Highschool
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="radio" id="radio2" value="Some college" aria-label="..." th:field="*{searchValue}"/>
+                        Some college
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="radio" id="radio3" value="Bachelors Degree" aria-label="..." th:field="*{searchValue}"/>
+                        Bachelors Degree
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="radio" id="radio4" value="Masters Degree or higher" aria-label="..." th:field="*{searchValue}"/>
+                        Masters Degree or higher
+                    </label>
+                    <button class="active"><a href="./">Search <span class="sr-only">(current)</span></a></button>
+                </form>
+                <form sec:authorize="hasAuthority('DIRECTOR')" class="navbar-form navbar-right" th:action="@{/search/camps}" th:object="${searchCamp}" method="post">
+                    <input type="text" class="form-control" placeholder="Search Camp by focus" name ="text" id="text1" th:field="*{searchValue}" >
+                    <button class="active"><a href="./">Search <span class="sr-only">(current)</span></a></button>
+                </form>
+            </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+
+
+</div>
+</nav>
+
+<div class="container-fluid" id="footer">
+        <footer class="footer footer-transparent" th:fragment="footlinks">
+            <div class="container">
+                <p class="copyright pull-right">
+                    &copy; 2017 <a href="http://www.creative-tim.com">CommonApp</a>, BootCamp Finder
+                </p>
+            </div>
+        </footer>
+</div>
+
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="/bootstrap3/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+
+<!doctype html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head >
+    <meta charset="utf-8" />
+    <th:block th:replace="base :: head"></th:block>
+</head>
+<body>
+<th:block th:replace="base :: nav"></th:block>
+            <div class="container">
+                <div class="jumbotron">
+                    <div class="container">
+                    <div class="row">
+                        <form autocomplete="off" action="#" th:action="@{/register}"
+                              th:object="${user}" method="post">
+
+                            <div class="form-group">
+                                <label for="firstName">First Name <mark><strong><span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</span></strong></mark></label>
+                                <input type="text" class="form-control" id="firstName" placeholder="First Name" th:field="*{firstName}" />
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name <mark><strong><span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</span></strong></mark></label>
+                                <input type="text" class="form-control" id="lastName" placeholder="Last Name" th:field="*{lastName}" />
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email <mark><strong><span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span></strong></mark></label>
+                                <input type="text" class="form-control" id="email" placeholder="Email" th:field="*{email}" />
+                            </div>
+                            <div class="form-group">
+                                <label for="username">Username <mark><strong><span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</span></strong></mark></label>
+                                <input type="text" class="form-control" id="username" placeholder="Username" th:field="*{username}" />
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password <mark><strong><span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span></strong></mark></label>
+                                <input type="password" class="form-control" id="password" placeholder="Password" th:field="*{password}" />
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="USER" th:field="*{roleSettings}"/>
+                                    User
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="DIRECTOR" th:field="*{roleSettings}"/>
+                                    Director
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+
+                    </div>
+                </div>
+                </div>
+            </div>
+<th:block th:replace="base :: footlinks"></th:block>
+</body>
+<th:block th:replace="base :: script"></th:block>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="base::head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<th:block th:replace="base::nav"></th:block>
+
+<table>
+    <tr>
+        <td>
+            <th:block th:replace="base::sidebar"></th:block>
+        </td>
+        <td>
+            <h1>New Camp Submission</h1>
+            <div class="container">
+                <div class="jumbotron">
+                    <div class="content">
+
+
+
+                        <h4>Posts</h4>
+
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Camp</th>
+                                <th>Director</th>
+                                <th>Description</th>
+                                <th>Testimonials</th>
+                                <th>Date</th>
+                                <th>Email</th>
+                                <th>Conact</th>
+                                <th sec:authorize="hasAnyAuthority('USER', 'EMPLOYER', 'ADMIN')">Enable</th>
+
+                            </tr>
+                            <tr th:each="row,iterStat : ${camps}">
+                                <td><img th:src="${row.title}" /></td>
+                                <td th:text="${row.directorName}"></td>
+                                <td th:text="${row.description}"></td>
+                                <td th:text="${row.testimonials}"></td>
+                                <td th:text="${row.getFormatStartDate()}+ ' ' + ${row.getFormatEndDate()}"></td>
+                                <td th:text="${directors.get(iterStat.index).getEmail()}"></td>
+                                <td><form class="form-inline" th:action="@{/generate/applicants}" th:object="${campBuilder}" method="post">
+                                    <div class="text">
+                                        <label>
+                                            <input type="hidden" th:name="campBuilderValue" th:id="campBuilderValue"  th:value="${directors.get(iterStat.index).getId}" aria-label="..."/>
+                                        </label>
+                                    </div>
+
+                                    <label>
+                                        <input type="hidden" th:name="campBuilderType" th:id="campBuilderType" value="build" aria-label="..."/>
+
+                                    </label>
+
+
+                                    <button type="submit" class="btn btn-default">Contact</button>
+                                </form></td>
+                                <td><form class="form-inline" th:action="@{/email/contact}" th:object="${contact}" method="post">
+                                    <div class="text">
+                                        <label>
+                                            <input type="hidden" th:name="emailValue" th:id="emailValue"  th:value="${directors.get(iterStat.index).getId()}" aria-label="..."/>
+                                        </label>
+                                    </div>
+
+                                    <label>
+                                        <input type="hidden" th:name="emailType" th:id="emailType" value="contact" aria-label="..."/>
+
+                                    </label>
+
+
+                                    <button type="submit" class="btn btn-default">Contact</button>
+                                </form></td>
+                                <td sec:authorize="hasAnyAuthority('DIRECTOR')" th:if="${row.decidedContains(camp)}"><form class="form-inline" th:action="@{/email/contact}" th:object="${contact}" method="post">
+                                    <div class="text">
+                                        <label>
+                                            <input type="hidden" th:name="emailValue" th:id="emailValue"  th:value="${row.id}" aria-label="..."/>
+                                        </label>
+                                    </div>
+
+                                    <label>
+                                        <input type="hidden" th:name="emailType" th:id="emailType" value="contact" aria-label="..."/>
+
+                                    </label>
+
+                                <td sec:authorize="hasAnyAuthority('ADMIN')"><form class="form-inline" th:action="@{/enable}" th:object="${enable}" method="post">
+                                    <div class="text">
+                                        <label>
+                                            <input type="hidden" th:name="enableValue" th:id="enableValue"  th:value="${row.id}" aria-label="..."/>
+                                        </label>
+                                    </div>
+
+                                    <label th:if="${row.enable}">
+                                        <input type="hidden" th:name="enableType" th:id="enableType" value="disable" aria-label="..."/>
+
+                                    </label>
+
+                                    <label th:if="${row.enable}">
+                                        <input type="hidden" th:name="enableType" th:id="enableType" value="enable" aria-label="..."/>
+
+                                    </label>
+
+                                    <!--<label>
+                                        <input type="hidden" th:name="enableType" th:id="enableType" value="flag" aria-label="..."/>
+
+                                    </label>
+                                    <label>
+
+                                        <input type="hidden" th:name="enableType" th:id="enableType" value="delete" aria-label="..."/>
+                                    </label>-->
+
+                                    <button th:if="${row.enable}" type="submit" class="btn btn-default">Disable</button>
+                                    <button th:if="${row.enable}" type="submit" class="btn btn-default">Enable</button>
+                                </form></td>
+
+
+
+                            </tr>
+                        </table>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+
+        </td>
+    </tr>
+</table>
+<th:block th:replace="base::footlinks"></th:block>
+</body>
+<th:block th:replace="base :: script"></th:block>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head th:replace="base :: head">
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron">
+        <div class="container">
+            <nav class="navbar navbar-default" th:replace="base::nav"> </nav>
+
+            <table class="table table-hover">
+
+                <tr>
+                    <th>Full Name</th>
+                    <th>Level Of Education</th>
+                    <th>Grade Date</th>
+                    <th>Description</th>
+
+
+                </tr>
+                <div th:each="applicant : ${applicants}">
+
+                    <tr>
+
+                        <td><p th:text = "${applicant.fullName}"></p></td>
+                        <td th:text = "${applicant.levelOfEdu}"></td>
+                        <td th:text = "${applicant.gradDate}"></td>
+                        <td th:text = "${applicant.description}"></td>
+
+
+                    </tr>
+                </div>
+
+            </table>
+
+
+           <!-- <table class="table table-hover">
+
+                <tr>
+                    <th>University</th>
+                    <th>Major</th>
+                    <th>Graduation Year</th>
+
+
+                </tr>
+                <div th:each="test : ${Educvalues}">
+
+                    <tr>
+
+                        <td th:text = "${test.university}"></td>
+                        <td th:text = "${test.major}"></td>
+                        <td th:text = "${test.graduationYear}"></td>
+
+                    </tr>
+                </div>
+
+            </table>
+
+
+            <table class="table table-hover">
+
+                <tr>
+                    <th>Company</th>
+                    <th>Position</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Duty</th>
+
+
+                </tr>
+                <div th:each="test : ${Expvalues}">
+
+                    <tr>
+
+                        <td th:text = "${test.company}"></td>
+                        <td th:text = "${test.position}"></td>
+                        <td th:text = "${test.startingYear}"></td>
+                        <td th:text = "${test.until}"></td>
+                        <td th:text = "${test.duty}"></td>
+
+                    </tr>
+                </div>
+
+            </table>
+
+            <table class="table table-hover">
+
+                <tr>
+                    <th>Good at</th>
+                    <th>Rating</th>
+
+                </tr>
+                <div th:each="test : ${Skillvalues}">
+
+                    <tr>
+
+                        <td th:text = "${test.skills}"></td>
+                        <td th:text = "${test.rating}"></td>
+
+
+                    </tr>
+                </div>
+
+            </table>-->
+
+
+        </div>
+    </div></div>
+</body>
+</html>
